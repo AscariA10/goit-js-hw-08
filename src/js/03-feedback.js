@@ -1,15 +1,19 @@
 const fullForm = document.querySelector('.feedback-form');
+var throttle = require('lodash.throttle');
 
 const userInformationObject = {};
 
-fullForm.addEventListener('input', () => {
-   userInformationObject.text = fullForm.message.value;
-   userInformationObject.mailText = fullForm.email.value;
+fullForm.addEventListener(
+   'input',
+   throttle(() => {
+      userInformationObject.text = fullForm.message.value;
+      userInformationObject.mailText = fullForm.email.value;
 
-   localStorage.setItem('feedback-form-state', JSON.stringify(userInformationObject));
+      localStorage.setItem('feedback-form-state', JSON.stringify(userInformationObject));
 
-   console.log(localStorage.getItem('feedback-form-state'));
-});
+      console.log(localStorage.getItem('feedback-form-state'));
+   }, 500)
+);
 
 firstOutput();
 
