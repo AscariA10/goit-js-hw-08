@@ -3,6 +3,7 @@ import Player from '@vimeo/player';
 const iframe = document.querySelector('#vimeo-player');
 const player = new Player(iframe);
 var throttle = require('lodash.throttle');
+let currentTime = localStorage.getItem('videoplayer-current-time') ?? '00:00';
 
 player.on('play', function () {
    console.log('played the video!');
@@ -16,7 +17,8 @@ player.on(
    }, 1000)
 );
 
-player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+player.setCurrentTime(currentTime);
+
 //    .then(function (seconds) {
 //       // seconds = the actual time that the player seeked to
 //    })
